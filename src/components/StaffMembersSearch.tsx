@@ -1,26 +1,44 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent } from "react";
+import Image from "next/image";
 
 interface StaffMembersSearchProps {
   setQuery: (query: string) => void;
   query: string;
-  staffMembers: any; 
+  setFilteredStaffMembers: any;
+  staffMembersList: any;
 }
 
-const StaffMembersSearch: React.FC<StaffMembersSearchProps> = ({ setQuery, query, staffMembers }) => {
-
+const StaffMembersSearch: React.FC<StaffMembersSearchProps> = ({
+  setQuery,
+  query,
+  setFilteredStaffMembers,
+  staffMembersList,
+}) => {
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.toLowerCase();
     setQuery(value);
+    setFilteredStaffMembers(
+      staffMembersList.filter((staffMember: any) =>
+        staffMember.name.toLowerCase().includes(value)
+      )
+    );
   };
 
   return (
-    <div className="p-4">
+    <div className="relative bg-white rounded mt-3 my-5">
       <input
         type="text"
         value={query}
         onChange={handleSearch}
-        className="p-2 border rounded"
+        className="w-full pl-3 pr-10 py-3  rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder="Search"
+      />
+      <Image
+        src="icons/search_icon.svg"
+        alt="Search Icon"
+        width={24}
+        height={24}
+        className="absolute top-4 right-2"
       />
     </div>
   );
