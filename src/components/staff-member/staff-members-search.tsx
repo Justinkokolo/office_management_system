@@ -1,5 +1,6 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import Image from "next/image";
+import { StaffMemberType } from "@/types/office";
 
 interface StaffMembersSearchProps {
   setQuery: (query: string) => void;
@@ -19,7 +20,7 @@ const StaffMembersSearch: React.FC<StaffMembersSearchProps> = ({
     setQuery(value);
     setFilteredStaffMembers(
       staffMembersList.filter((staffMember: any) =>
-        staffMember.name.toLowerCase().includes(value)
+        staffMember.firstName.toLowerCase().includes(value)
       )
     );
   };

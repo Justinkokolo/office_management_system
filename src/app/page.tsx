@@ -1,72 +1,34 @@
-import OfficeCard from "@/components/OfficeCard";
-import Image from "next/image";
+"use client";
+import React, { useEffect, useState } from "react";
+import OfficeCard from "@/components/office/office-card";
+import RoundButton from "@/components/buttons/round-button";
+import { useRouter } from "next/navigation";
+import { OfficeData } from "@/types/office";
 
 export default function Home() {
+  const [offices, setOffices] = useState<OfficeData[]>([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const storedOffices = localStorage.getItem("offices");
+    if (storedOffices) {
+      setOffices(JSON.parse(storedOffices));
+    }
+  }, []);
+
+  const handleAddButtonClick = () => {
+    router.push("office/add");
+  };
+
   return (
     <div className="m-5">
-      <h1>All Offices</h1>
-      {offices.map((office, index) => (
-        <OfficeCard
-          key={index}
-          officeName={office.officeName}
-          staffMembers={office.staffMembers}
-          phoneNumber={office.phoneNumber}
-          emailAddress={office.emailAddress}
-          officeCapacity={office.officeCapacity}
-          address={office.address}
-        />
+      <h1 className="flex text-2xl font-semibold justify-between my-10">
+        All Offices
+      </h1>
+      {offices.map((office) => (
+        <OfficeCard officeData={office} />
       ))}
+      <RoundButton onClick={handleAddButtonClick} />
     </div>
   );
 }
-
-const offices = [
-  {
-    officeName: "Main Office",
-    staffMembers: "John Doe, Jane Smith, Bob Johnson",
-    phoneNumber: "123-456-7890",
-    emailAddress: "main.office@example.com",
-    officeCapacity: 50,
-    address: "123 Main St, Anytown, USA",
-  },
-  {
-    officeName: "Branch Office 1",
-    staffMembers: "Alice Brown, Chris Green, Dana White",
-    phoneNumber: "234-567-8901",
-    emailAddress: "branch1.office@example.com",
-    officeCapacity: 30,
-    address: "456 Oak St, Othertown, USA",
-  },
-  {
-    officeName: "Branch Office 2",
-    staffMembers: "Eve Black, Frank Blue, Grace Gray",
-    phoneNumber: "345-678-9012",
-    emailAddress: "branch2.office@example.com",
-    officeCapacity: 40,
-    address: "789 Pine St, Sometown, USA",
-  },
-  {
-    officeName: "Branch Office 3",
-    staffMembers: "Henry Yellow, Irene Orange, Jack Purple",
-    phoneNumber: "456-789-0123",
-    emailAddress: "branch3.office@example.com",
-    officeCapacity: 35,
-    address: "101 Maple St, Thistown, USA",
-  },
-  {
-    officeName: "Branch Office 4",
-    staffMembers: "Karen Red, Leo Lime, Mike Maroon",
-    phoneNumber: "567-890-1234",
-    emailAddress: "branch4.office@example.com",
-    officeCapacity: 45,
-    address: "202 Cedar St, Thatown, USA",
-  },
-  {
-    officeName: "Branch Office 5",
-    staffMembers: "Nina Pink, Oliver Olive, Paul Peach",
-    phoneNumber: "678-901-2345",
-    emailAddress: "branch5.office@example.com",
-    officeCapacity: 60,
-    address: "303 Birch St, Anothertown, USA",
-  },
-];

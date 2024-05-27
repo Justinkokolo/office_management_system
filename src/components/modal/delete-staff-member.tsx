@@ -2,34 +2,28 @@
 import React, { useState } from "react";
 import Button from "../buttons/button";
 import Modal from "./modal";
-import StepIndicator from "./step-indicator";
 
 interface DeleteStaffMemberModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onEditStaffMember: () => void;
+  onDeleteStaffMember: () => void;
 }
-
-const avatars = [
-  "/avatars/avatar_1.png",
-  "/avatars/avatar_2.png",
-  "/avatars/avatar_3.png",
-  "/avatars/avatar_4.png",
-  "/avatars/avatar_5.png",
-  "/avatars/avatar_6.png",
-  "/avatars/avatar_7.png",
-];
 
 const DeleteStaffMemberModal: React.FC<DeleteStaffMemberModalProps> = ({
   isOpen,
   onClose,
+  onEditStaffMember,
+  onDeleteStaffMember,
 }) => {
   const [step, setStep] = useState(1);
 
   const handleEditStaffMember = () => {
     //setStep(step + 1);
+    // setIsAddStaffMemberModalOpen(true);
   };
 
-  const handleDeleteStaffMember = () => {
+  const handleDeleteStaffMemberStepOne = () => {
     setStep(step + 1);
   };
 
@@ -37,13 +31,16 @@ const DeleteStaffMemberModal: React.FC<DeleteStaffMemberModalProps> = ({
     setStep(step - 1);
   };
 
+  // const onDeleteStaffMember = () => {
+
+  //}
 
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
       onClickBackButton={handleBack}
-      title={step === 2 && "Are you sure you want to Delete Staff Member?"}
+      title={step === 2 ? "Are you sure you want to Delete Staff Member?" : ""}
       hasBackButton={step === 1 ? false : true}
     >
       <button
@@ -55,9 +52,9 @@ const DeleteStaffMemberModal: React.FC<DeleteStaffMemberModalProps> = ({
 
       {step === 1 && (
         <div className="flex flex-col gap-7 w-full">
-          <Button onClick={handleEditStaffMember} name="EDIT STAFF MEMBER" />
+          <Button onClick={onEditStaffMember} name="EDIT STAFF MEMBER" />
           <Button
-            onClick={handleDeleteStaffMember}
+            onClick={handleDeleteStaffMemberStepOne}
             name="DELETE STAFF MEMBER"
             color="white"
           />
@@ -66,13 +63,17 @@ const DeleteStaffMemberModal: React.FC<DeleteStaffMemberModalProps> = ({
 
       {step === 2 && (
         <div className="flex flex-col gap-7 w-full">
-        <Button onClick={handleEditStaffMember} name="DELETE STAFF MEMBER" color="red" />
-        <Button
-          onClick={handleDeleteStaffMember}
-          name="KEEP STAFF MEMBER"
-          color="white"
-        />
-      </div>
+          <Button
+            onClick={onDeleteStaffMember}
+            name="DELETE STAFF MEMBER"
+            color="red"
+          />
+          <Button
+            onClick={onClose}
+            name="KEEP STAFF MEMBER"
+            color="white"
+          />
+        </div>
       )}
     </Modal>
   );

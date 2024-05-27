@@ -2,29 +2,19 @@ import React, { useState, useEffect } from "react";
 import Button from "../buttons/button";
 import Modal from "./modal";
 import StepIndicator from "./step-indicator";
+import { StaffMemberType, OfficeData } from "@/types/office";
+import { avatars } from "@/consts/office";
 
 interface AddStaffModalProps {
+  officeId: string;
   isOpen: boolean;
   onClose: () => void;
   isEditMode?: boolean;
-  staffData?: {
-    firstName: string;
-    lastName: string;
-    avatar: string;
-  };
+  staffData?: StaffMemberType;
 }
 
-const avatars = [
-  "/avatars/avatar_1.png",
-  "/avatars/avatar_2.png",
-  "/avatars/avatar_3.png",
-  "/avatars/avatar_4.png",
-  "/avatars/avatar_5.png",
-  "/avatars/avatar_6.png",
-  "/avatars/avatar_7.png",
-];
-
 const AddStaffModal: React.FC<AddStaffModalProps> = ({
+  officeId,
   isOpen,
   onClose,
   isEditMode = false,
@@ -56,14 +46,33 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
   };
 
   const handleSubmit = () => {
-    if (isEditMode) {
-      console.log("Editing Staff Member:");
-    } else {
-      console.log("Adding New Staff Member:");
+    const newStaffMember: StaffMemberType = {
+      id:
+        isEditMode && staffData
+          ? staffData.id
+          : new Date().getTime().toString(),
+      firstName,
+      lastName,
+      avatar: selectedAvatar,
+    };
+
+    const storedOffices = localStorage.getItem("offices");
+    if (storedOffices) {
+      const offices: OfficeData[] = JSON.parse(storedOffices);
+      const updatedOffices = offices.map((office) => {
+        if (office.officeId === officeId) {
+          const updatedStaffMembersList = isEditMode
+            ? office.staffMembersList.map((member) =>
+                member.id === newStaffMember.id ? newStaffMember : member
+              )
+            : [...office.staffMembersList, newStaffMember];
+          return { ...office, staffMembersList: updatedStaffMembersList };
+        }
+        return office;
+      });
+      localStorage.setItem("offices", JSON.stringify(updatedOffices));
     }
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Selected Avatar:", selectedAvatar);
+
     onClose();
   };
 
