@@ -13,6 +13,7 @@ interface AddStaffModalProps {
   onClose: () => void;
   isEditMode?: boolean;
   staffData?: StaffMemberType;
+  setEditStaffMember: any;
 }
 
 const AddStaffModal: React.FC<AddStaffModalProps> = ({
@@ -21,6 +22,7 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
   onClose,
   isEditMode = false,
   staffData,
+  setEditStaffMember,
 }) => {
   const [step, setStep] = useState(1);
   const [firstName, setFirstName] = useState("");
@@ -75,6 +77,7 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
     }
     resetForm();
     onClose();
+    setEditStaffMember(false)
   };
   const resetForm = () => {
     setFirstName("");
@@ -140,7 +143,7 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
           <StepIndicator currentStep={step} totalSteps={2} />
           <Button
             onClick={handleSubmit}
-            name={isEditMode ? "UPDATE STAFF MEMBER" : "ADD STAFF MEMBER"}
+            name={isEditMode && staffData ? "UPDATE STAFF MEMBER" : "ADD STAFF MEMBER"}
           />
         </div>
       )}

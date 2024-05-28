@@ -24,7 +24,7 @@ const OfficeDetails = ({ params }: { params: { officeId: string } }) => {
   const [filteredStaffMembers, setFilteredStaffMembers] = useState<
     StaffMemberType[]
   >([]);
-  const [editStaffMembers, setEditStaffMembers] = useState<boolean>(false);
+  const [editStaffMember, setEditStaffMember] = useState<boolean>(false);
 
   const [isAddStaffMemberModalOpen, setIsAddStaffMemberModalOpen] =
     useState(false);
@@ -48,7 +48,7 @@ const OfficeDetails = ({ params }: { params: { officeId: string } }) => {
 
   const onEditStaffMember = () => {
     setIsDeleteStaffMemberModalOpen(false);
-    setEditStaffMembers(true);
+    setEditStaffMember(true);
     setIsAddStaffMemberModalOpen(true);
   };
 
@@ -142,7 +142,8 @@ const OfficeDetails = ({ params }: { params: { officeId: string } }) => {
         onClose={handleCloseAddStaffMemberModal}
         officeId={officeId}
         staffData={selectedStaffMember}
-        isEditMode={editStaffMembers}
+        isEditMode={editStaffMember}
+        setEditStaffMember={setEditStaffMember}
       />
       <DeleteStaffMemberModal
         isOpen={isDeleteStaffMemberModalOpen}
