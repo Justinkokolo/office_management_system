@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Office Management System
 
-## Getting Started
+Smarter Britain platform
 
-First, run the development server:
+## Pre-requisites
+
+To work with this repository, you will need the following installed on your system:
+
+- [Node.js + NPM](https://nodejs.org/en/)
+- [VS Code](https://code.visualstudio.com/download)
+- [Git](https://git-scm.com/downloads)
+
+## Getting set up
+
+To set the theme up on your machine, install the project dependencies by running:
+
+```bash
+npm install
+```
+
+## Running the app
+
+To run the app, run:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This will start a NextJS development server and make it accessible at localhost:3000, where you'll be able to interact with the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack + Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Frameworks
 
-## Learn More
+- [Next.js](https://nextjs.org/) – React framework for building performant apps with the best developer experience
+- [Auth.js](https://authjs.dev/) – Handle user authentication with ease with providers like Google, Twitter, GitHub, etc.
+- [Prisma](https://www.prisma.io/) – Typescript-first ORM for Node.js
 
-To learn more about Next.js, take a look at the following resources:
+### UI
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework for rapid UI development
+- [Radix](https://www.radix-ui.com/) – Primitives like modal, popover, etc. to build a stellar user experience
+- [Framer Motion](https://framer.com/motion) – Motion library for React to animate components with ease
+- [React Icons](https://www.npmjs.com/package/react-icons) – All the icons
+- [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) – Optimize custom fonts and remove external network requests for improved performance
+- [`ImageResponse`](https://beta.nextjs.org/docs/api-reference/image-response) – Generate dynamic Open Graph images at the edge
+- [`react-wrap-balancer`](https://github.com/shuding/react-wrap-balancer) – Simple React component that makes titles more readable
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Hooks and Utilities
 
-## Deploy on Vercel
+- `useLocalStorage` – Persist data in the browser's local storage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Code Quality
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [TypeScript](https://www.typescriptlang.org/) – Static type checker for end-to-end typesafety
+- [Prettier](https://prettier.io/) – Opinionated code formatter for consistent code style
+- [ESLint](https://eslint.org/) – Pluggable linter for Next.js and TypeScript

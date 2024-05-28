@@ -167,7 +167,11 @@ const ManageOfficePage: React.FC<ManageOfficePageProps> = ({
           name={isEditMode ? "UPDATE OFFICE" : "ADD OFFICE"}
         />
         {isEditMode && (
-          <Button onClick={handleOfficeDelete} color="white" name="DELETE OFFICE" />
+          <Button
+            onClick={handleOfficeDelete}
+            color="white"
+            name="DELETE OFFICE"
+          />
         )}
       </form>
     </div>
