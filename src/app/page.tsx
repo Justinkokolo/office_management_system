@@ -16,19 +16,20 @@ export default function Home() {
     }
   }, []);
 
-  const handleAddButtonClick = () => {
-    router.push("office/add");
-  };
-
   return (
-    <div className="m-5">
-      <h1 className="flex text-2xl font-semibold justify-between my-10">
+    <div className="page-width relative ">
+      <h1 className="flex text-2xl font-semibold justify-between mt-10 md:mb-7">
         All Offices
       </h1>
-      {offices.map((office) => (
-        <OfficeCard officeData={office} />
-      ))}
-      <RoundButton onClick={handleAddButtonClick} />
+      <div className="grid md:grid-cols-2 md:gap-5">
+        {offices.map((office) => (
+          <OfficeCard
+            key={office.officeId}
+            officeData={office}
+          />
+        ))}
+        <RoundButton onClick={() => router.push("/office/add")} />
+      </div>
     </div>
   );
 }

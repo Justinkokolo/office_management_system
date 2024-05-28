@@ -1,5 +1,3 @@
-//"use client";
-
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,12 +21,12 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ officeData }) => {
     >
       <div className=" flex flex-col gap-3">
         <div className="flex justify-between">
-          <Link href={`office/${officeData.officeId}`}>
+          <Link href={`/${officeData.officeId}`} scroll={false}>
             <h1 className="text-2xl font-bold">{officeData.officeName}</h1>
           </Link>
-          <Link href={`office/edit/${officeData.officeId}`}>
+          <Link href={`office/edit/${officeData.officeId}`} scroll={false}>
             <Image
-              src="icons/edit_icon.svg"
+              src="/icons/edit_icon.svg"
               width={24}
               height={24}
               alt="Edit"
@@ -37,7 +35,7 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ officeData }) => {
         </div>
         <div className="flex  gap-5">
           <Image
-            src="icons/people_icon.svg"
+            src="/icons/people_icon.svg"
             width={24}
             height={24}
             alt="people"
@@ -55,11 +53,10 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ officeData }) => {
         >
           <p>More Info</p>
           <Image
-            src={`icons/chevron_up_icon.svg`}
+            src={`/icons/chevron_${showMoreInfo ? "up" : "down"}_icon.svg`}
             width={24}
             height={24}
             alt={`chevron ${showMoreInfo ? "down" : "up"}`}
-            className={`${showMoreInfo ? "rotate-180" : "up"}`}
           />
         </div>
       </div>
@@ -67,7 +64,7 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ officeData }) => {
         <div className="flex flex-col gap-5">
           <div className="flex  gap-5">
             <Image
-              src="icons/phone_icon.svg"
+              src="/icons/phone_icon.svg"
               width={24}
               height={24}
               alt="Staff Icon"
@@ -76,7 +73,7 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ officeData }) => {
           </div>
           <div className="flex  gap-5">
             <Image
-              src="icons/email_icon.svg"
+              src="/icons/email_icon.svg"
               width={24}
               height={24}
               alt="Staff Icon"
@@ -85,7 +82,7 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ officeData }) => {
           </div>
           <div className="flex  gap-5">
             <Image
-              src="icons/people_2_icon.svg"
+              src="/icons/people_2_icon.svg"
               width={24}
               height={24}
               alt="Staff Icon"
@@ -94,7 +91,7 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ officeData }) => {
           </div>
           <div className="flex  gap-5">
             <Image
-              src="icons/location_icon.svg"
+              src="/icons/location_icon.svg"
               width={24}
               height={24}
               alt="Staff Icon"
@@ -108,4 +105,3 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ officeData }) => {
 };
 
 export default OfficeCard;
-//"use client";

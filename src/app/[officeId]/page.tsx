@@ -2,13 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+
 import OfficeCard from "@/components/office/office-card";
 import StaffMember from "@/components/staff-member/staff-member";
 import RoundButton from "@/components/buttons/round-button";
-import AddStaffModal from "@/components/modal/add-staff-member-modal";
-import DeleteStaffMemberModal from "@/components/modal/delete-staff-member";
+import AddStaffModal from "@/components/modals/add-staff-member-modal";
+import DeleteStaffMemberModal from "@/components/modals/delete-staff-member";
 import BackButton from "@/components/buttons/back-button";
 import StaffMembersSearch from "@/components/staff-member/staff-members-search";
+
 import { OfficeData, StaffMemberType } from "@/types/office";
 
 const OfficeDetails = ({ params }: { params: { officeId: string } }) => {
@@ -42,7 +44,7 @@ const OfficeDetails = ({ params }: { params: { officeId: string } }) => {
         setFilteredStaffMembers(foundOffice.staffMembersList);
       }
     }
-  }, [officeId]);
+  }, [officeId, isAddStaffMemberModalOpen]);
 
   const onEditStaffMember = () => {
     setIsDeleteStaffMemberModalOpen(false);
@@ -69,7 +71,6 @@ const OfficeDetails = ({ params }: { params: { officeId: string } }) => {
 
   const onDeleteStaffMember = () => {
     if (!office) return;
-    console.log(selectedStaffMember);
 
     const updatedStaffMembers = office.staffMembersList.filter(
       (staffMember) => staffMember.id !== selectedStaffMember?.id
@@ -97,20 +98,20 @@ const OfficeDetails = ({ params }: { params: { officeId: string } }) => {
   if (!office) {
     return (
       <div className="m-5">
-        <BackButton />
-        <h1 className="text-2xl font-semibold my-10">No Office Found</h1>
+        <BackButton onClick={() => router.back()} />
+        <h1 className="text-2xl font-semibold my-10">Loading...</h1>
         <RoundButton onClick={handleAddButtonClick} />
       </div>
     );
   }
 
   return (
-    <>
-      <div className="grid grid-cols-2 mt-5">
-        <BackButton />
-        <h1>Office {office.officeName}</h1>
+    <div className="page-width relative">
+      <div className=" grid grid-cols-2 mt-5  md:my-7">
+        <BackButton onClick={() => router.back()} />
+        <h4>Office</h4>
       </div>
-      <div>
+      <div className="flex flex-col gap-5">
         <OfficeCard officeData={office} />
         <StaffMembersSearch
           setQuery={setQuery}
@@ -149,7 +150,7 @@ const OfficeDetails = ({ params }: { params: { officeId: string } }) => {
         onEditStaffMember={onEditStaffMember}
         onDeleteStaffMember={onDeleteStaffMember}
       />
-    </>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ interface StaffMembersSearchProps {
   setQuery: (query: string) => void;
   query: string;
   setFilteredStaffMembers: any;
-  staffMembersList: any;
+  staffMembersList: StaffMemberType[];
 }
 
 const StaffMembersSearch: React.FC<StaffMembersSearchProps> = ({
@@ -19,7 +19,7 @@ const StaffMembersSearch: React.FC<StaffMembersSearchProps> = ({
     const value = event.target.value.toLowerCase();
     setQuery(value);
     setFilteredStaffMembers(
-      staffMembersList.filter((staffMember: any) =>
+      staffMembersList.filter((staffMember: StaffMemberType) =>
         staffMember.firstName.toLowerCase().includes(value)
       )
     );
@@ -35,7 +35,7 @@ const StaffMembersSearch: React.FC<StaffMembersSearchProps> = ({
         placeholder="Search"
       />
       <Image
-        src="icons/search_icon.svg"
+        src="/icons/search_icon.svg"
         alt="Search Icon"
         width={24}
         height={24}

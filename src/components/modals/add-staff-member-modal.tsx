@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+
 import Button from "../buttons/button";
 import Modal from "./modal";
 import StepIndicator from "./step-indicator";
+
 import { StaffMemberType, OfficeData } from "@/types/office";
 import { avatars } from "@/consts/office";
 
@@ -31,9 +33,7 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
       setLastName(staffData.lastName);
       setSelectedAvatar(staffData.avatar);
     } else {
-      setFirstName("");
-      setLastName("");
-      setSelectedAvatar("");
+      resetForm();
     }
   }, [isEditMode, staffData]);
 
@@ -59,6 +59,7 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
     const storedOffices = localStorage.getItem("offices");
     if (storedOffices) {
       const offices: OfficeData[] = JSON.parse(storedOffices);
+
       const updatedOffices = offices.map((office) => {
         if (office.officeId === officeId) {
           const updatedStaffMembersList = isEditMode
@@ -72,8 +73,14 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
       });
       localStorage.setItem("offices", JSON.stringify(updatedOffices));
     }
-
+    resetForm();
     onClose();
+  };
+  const resetForm = () => {
+    setFirstName("");
+    setLastName("");
+    setSelectedAvatar("");
+    setStep(1);
   };
 
   return (

@@ -1,5 +1,5 @@
-// components/AddStaffModal.tsx
 import React, { useState } from "react";
+
 import Button from "../buttons/button";
 import Modal from "./modal";
 
@@ -18,11 +18,6 @@ const DeleteStaffMemberModal: React.FC<DeleteStaffMemberModalProps> = ({
 }) => {
   const [step, setStep] = useState(1);
 
-  const handleEditStaffMember = () => {
-    //setStep(step + 1);
-    // setIsAddStaffMemberModalOpen(true);
-  };
-
   const handleDeleteStaffMemberStepOne = () => {
     setStep(step + 1);
   };
@@ -31,17 +26,24 @@ const DeleteStaffMemberModal: React.FC<DeleteStaffMemberModalProps> = ({
     setStep(step - 1);
   };
 
-  // const onDeleteStaffMember = () => {
+  const handCloseModal = () => {
+    setStep(1);
+    onClose();
+  };
 
-  //}
+  const handleOnDeleteStaffMember = () => {
+    setStep(1);
+    onDeleteStaffMember();
+  };
 
   return (
     <Modal
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={handCloseModal}
       onClickBackButton={handleBack}
       title={step === 2 ? "Are you sure you want to Delete Staff Member?" : ""}
       hasBackButton={step === 1 ? false : true}
+      hideCloseButton={true}
     >
       <button
         onClick={onClose}
@@ -64,12 +66,12 @@ const DeleteStaffMemberModal: React.FC<DeleteStaffMemberModalProps> = ({
       {step === 2 && (
         <div className="flex flex-col gap-7 w-full">
           <Button
-            onClick={onDeleteStaffMember}
+            onClick={handleOnDeleteStaffMember}
             name="DELETE STAFF MEMBER"
             color="red"
           />
           <Button
-            onClick={onClose}
+            onClick={handCloseModal}
             name="KEEP STAFF MEMBER"
             color="white"
           />

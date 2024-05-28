@@ -1,10 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 import Button from "@/components/buttons/button";
 import BackButton from "@/components/buttons/back-button";
+
 import { OfficeData, StaffMemberType } from "@/types/office";
 import ColorPicker from "./color-picker";
-import { useRouter } from "next/navigation";
 
 interface ManageOfficePageProps {
   isEditMode?: boolean;
@@ -89,7 +91,7 @@ const ManageOfficePage: React.FC<ManageOfficePageProps> = ({
     router.push("/");
   };
 
-  const handleDelete = () => {
+  const handleOfficeDelete = () => {
     if (officeId) {
       const storedOffices = localStorage.getItem("offices");
       if (storedOffices) {
@@ -140,10 +142,10 @@ const ManageOfficePage: React.FC<ManageOfficePageProps> = ({
   ];
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="page-width flex flex-col gap-5">
       <div className="grid grid-cols-2 mt-5 mb-10">
-        <BackButton />
-        <h1>{isEditMode ? "Edit Office" : "New Office"}</h1>
+        <BackButton onClick={() => router.back()} />
+        <h4>{isEditMode ? "Edit Office" : "New Office"}</h4>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 mb-5">
         {inputFields.map((field, index) => (
@@ -165,7 +167,7 @@ const ManageOfficePage: React.FC<ManageOfficePageProps> = ({
           name={isEditMode ? "UPDATE OFFICE" : "ADD OFFICE"}
         />
         {isEditMode && (
-          <Button onClick={handleDelete} color="white" name="DELETE OFFICE" />
+          <Button onClick={handleOfficeDelete} color="white" name="DELETE OFFICE" />
         )}
       </form>
     </div>

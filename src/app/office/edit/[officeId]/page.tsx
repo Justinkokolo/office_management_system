@@ -6,9 +6,9 @@ const EditOfficePage = ({ params }: { params: { officeId: string } }) => {
   const { officeId } = params;
 
   return (
-    <>
-      <ManageOfficePage isEditMode={true} officeId={officeId} />
-    </>
+<div >
+        <ManageOfficePage isEditMode={true} officeId={officeId} />
+    </ div>
   );
 };
 

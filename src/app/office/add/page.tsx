@@ -1,6 +1,6 @@
 import ManageOfficePage from "@/components/office/manage-office";
 
-const CreateOfficePage: React.FC = () => {
+const CreateOfficePage = () => {
   return (
     <>
       <ManageOfficePage />
